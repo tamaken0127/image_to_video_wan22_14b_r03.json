@@ -1,0 +1,266 @@
+{
+  "input": {
+    "workflow": {
+      "6": {
+        "inputs": {
+          "text": "上半身の服がずり落ち、胸を露出し、胸のサイズは維持。官能的な表情で自分で乳首をいじっている。",
+          "clip": [
+            "38",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Positive Prompt)"
+        }
+      },
+      "7": {
+        "inputs": {
+          "text": "静止カメラ、カメラアングル固定、背景の変化なし、細部のぼやけ、字幕、最低品質、低品質、JPEG圧縮残渣、醜い、不完全、余分な指、余分な足、下手な手、下手な顔、変形、破損、ねじれた手足、癒着した指、背景に多数の人物\n",
+          "clip": [
+            "38",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Negative Prompt)"
+        }
+      },
+      "8": {
+        "inputs": {
+          "samples": [
+            "77",
+            0
+          ],
+          "vae": [
+            "39",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "38": {
+        "inputs": {
+          "filename": "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "39": {
+        "inputs": {
+          "filename": "wan_2.1_vae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "50": {
+        "inputs": {
+          "value": 768,
+          "positive": [
+            "6",
+            0
+          ],
+          "negative": [
+            "7",
+            0
+          ],
+          "vae": [
+            "39",
+            0
+          ],
+          "start_image": [
+            "52",
+            0
+          ],
+          "width": [
+            "63",
+            0
+          ],
+          "height": [
+            "63",
+            1
+          ]
+        },
+        "class_type": "WanImageToVideo",
+        "_meta": {
+          "title": "WanImageToVideo"
+        }
+      },
+      "52": {
+        "inputs": {
+          "image": "4855665.jpg"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "LoadImage"
+        }
+      },
+      "55": {
+        "inputs": {
+          "value": 5,
+          "model": [
+            "73",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingSD3",
+        "_meta": {
+          "title": "ModelSamplingSD3"
+        }
+      },
+      "63": {
+        "inputs": {
+          "image": [
+            "52",
+            0
+          ]
+        },
+        "class_type": "GetImageSize",
+        "_meta": {
+          "title": "GetImageSize"
+        }
+      },
+      "66": {
+        "inputs": {
+          "filename": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "73": {
+        "inputs": {
+          "filename": "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors",
+          "model": [
+            "66",
+            0
+          ]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      },
+      "74": {
+        "inputs": {
+          "value": 16,
+          "images": [
+            "8",
+            0
+          ]
+        },
+        "class_type": "CreateVideo",
+        "_meta": {
+          "title": "CreateVideo"
+        }
+      },
+      "75": {
+        "inputs": {
+          "text": "ComfyUI",
+          "video": [
+            "74",
+            0
+          ]
+        },
+        "class_type": "SaveVideo",
+        "_meta": {
+          "title": "SaveVideo"
+        }
+      },
+      "77": {
+        "inputs": {
+          "text": "disable",
+          "model": [
+            "55",
+            0
+          ],
+          "positive": [
+            "50",
+            0
+          ],
+          "negative": [
+            "50",
+            1
+          ],
+          "latent_image": [
+            "78",
+            0
+          ]
+        },
+        "class_type": "KSamplerAdvanced",
+        "_meta": {
+          "title": "KSamplerAdvanced"
+        }
+      },
+      "78": {
+        "inputs": {
+          "text": "enable",
+          "model": [
+            "81",
+            0
+          ],
+          "positive": [
+            "50",
+            0
+          ],
+          "negative": [
+            "50",
+            1
+          ],
+          "latent_image": [
+            "50",
+            2
+          ]
+        },
+        "class_type": "KSamplerAdvanced",
+        "_meta": {
+          "title": "KSamplerAdvanced"
+        }
+      },
+      "79": {
+        "inputs": {
+          "filename": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "80": {
+        "inputs": {
+          "filename": "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors",
+          "model": [
+            "79",
+            0
+          ]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      },
+      "81": {
+        "inputs": {
+          "value": 5,
+          "model": [
+            "80",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingSD3",
+        "_meta": {
+          "title": "ModelSamplingSD3"
+        }
+      }
+    }
+  }
+}
